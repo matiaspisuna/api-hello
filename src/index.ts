@@ -13,6 +13,16 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		const data = {
+			message: 'Hello World!',
+			source: 'Cloudflare Worker',
+			timestamp: new Date().toISOString(),
+		};
+
+		return new Response(JSON.stringify(data), {
+			headers: {
+				'content-type': 'application/json;charset=UTF-8',
+			},
+		});
 	},
 } satisfies ExportedHandler<Env>;
